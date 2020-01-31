@@ -1,5 +1,7 @@
 package item.s02;
 
+import accessory.ListNode;
+
 /**
  * created by zhangzhiyuan in 2019/4/26
  */
@@ -32,22 +34,4 @@ public class Solution {
         }
         return dummy.next;
     }
-
-    public static void main(String[] args) {
-        ListNode l1 = new ListNode(1);
-        l1.next = new ListNode(2);
-        l1.next.next = new ListNode(3);
-        ListNode l2 = new ListNode(9);
-        l2.next = new ListNode(8);
-        l2.next.next = new ListNode(9);
-        ListNode listNode = new Solution().addTwoNumbers(l1, l2);
-        System.out.println(listNode);
-    }
-}
-
-
-class ListNode {
-      int val;
-      ListNode next;
-      ListNode(int x) { val = x; }
 }

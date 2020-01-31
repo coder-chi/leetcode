@@ -1,5 +1,7 @@
 package item.s85;
 
+import java.util.Stack;
+
 /**
  * created by zhangzhiyuan in 2019/7/25
  */
@@ -57,5 +59,41 @@ public class Solution {
             }
         }
         return result;
+    }
+
+    /**
+     * 栈解法
+     * @param matrix
+     * @return
+     */
+    public int maximalRectangle2(char[][] matrix) {
+        if (matrix.length == 0) {
+            return 0;
+        }
+        int maxarea = 0;
+        int[] dp = new int[matrix[0].length];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                dp[j] = matrix[i][j] == '1' ? dp[j] + 1 : 0;
+            }
+            maxarea = Math.max(maxarea, leetcode84dp(dp));
+        }
+        return maxarea;
+    }
+
+    private int leetcode84dp(int[] heights) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(-1);
+        int maxArea = 0;
+        for (int i = 0; i < heights.length; i++) {
+            while (stack.peek() != -1 && heights[stack.peek()] >= heights[i]) {
+                maxArea = Math.max(maxArea, heights[stack.pop()] * (i - stack.peek() - 1));
+            }
+            stack.push(i);
+        }
+        while (stack.peek() != -1) {
+            maxArea = Math.max(maxArea, heights[stack.pop()] * (heights.length - stack.peek() - 1));
+        }
+        return maxArea;
     }
 }
